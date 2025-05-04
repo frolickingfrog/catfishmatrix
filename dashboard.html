@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Identity Matrix</title>
+  <title>Dashboard</title>
   <style>
     body {
       font-family: sans-serif;
@@ -13,32 +13,37 @@
       margin: auto;
     }
     .header {
-      margin-top: 20px;
-      font-size: 1.2em;
-      font-weight: bold;
+      margin-top: 10px; /* Reduced margin */
+      font-size: 1.5em; /* Larger font size */
+      font-weight: bold; /* Bold font */
       color: #333;
+      margin-bottom: 10px; /* Reduced margin */
     }
     .trait {
-      margin-bottom: 30px;
-    }
-    .trait h3 {
-      margin-bottom: 5px;
+      margin-bottom: 10px; /* Reduced margin */
+      list-style-type: disc; /* Add bullet points */
+      margin-left: 20px; /* Indent bullet points */
     }
     .labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9em;
+      font-size: 1em;
       color: #555;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background: #ccc;
+      margin: 20px 0;
     }
   </style>
 </head>
 <body>
-  <h1>Identity Matrix</h1>
+  <h1>Dashboard</h1>
   <div id="slider-values">
     <!-- Retrieved slider values will be displayed here -->
   </div>
 
   <script>
+    // Function to retrieve and display slider values
     window.onload = function() {
       const sliderValuesContainer = document.getElementById('slider-values');
       let currentHeader = ""; // Track the current header to avoid duplicates
@@ -59,14 +64,12 @@
             sliderValuesContainer.appendChild(headerElement);
           }
 
-          // Create a div to display the trait and percentages
+          // Create a list item to display the trait and percentages
           const traitDiv = document.createElement('div');
           traitDiv.classList.add('trait');
           traitDiv.innerHTML = `
-            <h3>${title}</h3>
             <div class="labels">
-              <span>${labels.left} (${percentages.left}%)</span>
-              <span>${labels.right} (${percentages.right}%)</span>
+              <strong>${title}:</strong> ${labels.left} (${percentages.left}%) + ${labels.right} (${percentages.right}%)
             </div>
           `;
           sliderValuesContainer.appendChild(traitDiv);
