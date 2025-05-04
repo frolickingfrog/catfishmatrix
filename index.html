@@ -5,32 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catfish Matrix</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap'); /* Import Inter font */
+        
         body {
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #121212;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
+            background: url('b2.png') no-repeat center center fixed; /* Set b2.png as the background */
+            background-size: cover; /* Ensure the image covers the entire screen */
+            color: #0000ff; /* Blue text color */
+            font-family: 'Inter', Arial, sans-serif; /* Use Inter font */
             text-align: center;
         }
         h1 {
-            font-size: 3rem;
+            font-size: 1.2rem; /* Smaller font size */
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* Slight gradient glow around text */
+            font-weight: normal; /* Remove bold styling */
         }
         button {
             padding: 10px 20px;
             font-size: 1rem;
-            color: #ffffff;
-            background-color: #007BFF;
-            border: none;
+            color: #0000ff; /* Match text color */
+            background-color: transparent; /* No fill */
+            border: 2px solid #0000ff; /* Blue outline */
             border-radius: 5px;
             cursor: pointer;
+            font-family: 'Inter', Arial, sans-serif; /* Match font style */
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: rgba(0, 0, 255, 0.1); /* Light blue background on hover */
         }
     </style>
 </head>
@@ -39,11 +45,5 @@
         <h1>Catfish Matrix</h1>
         <button onclick="location.href='personality-matrix.html'">Enter the Matrix</button>
     </div>
-
-    <script>
-        function enterMatrix() {
-            alert('Welcome to the Catfish Matrix!');
-        }
-    </script>
 </body>
 </html>
