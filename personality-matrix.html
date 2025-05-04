@@ -27,6 +27,27 @@
       width: 100%;
       margin: 10px 0;
     }
+    .arrow-button {
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .arrow-button:hover {
+        background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
@@ -158,6 +179,172 @@
     </div>
     <input type="range" min="0" max="100" value="50">
   </div>
+
+  <div class="trait">
+    <h3>Gender Expression</h3>
+    <div class="labels">
+      <span>Hyper-masculine/feminine</span>
+      <span>Nonbinary / Gender-neutral</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Sexual Orientation</h3>
+    <div class="labels">
+      <span>Hetero-romantic</span>
+      <span>Fluid / Queer / AroAce</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Cultural Identity</h3>
+    <div class="labels">
+      <span>Mainstream / Majority</span>
+      <span>Subcultural / Marginal</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Ethnic Orientation</h3>
+    <div class="labels">
+      <span>Strong ethnic pride</span>
+      <span>Ethnically neutral/detached</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Class Identity</h3>
+    <div class="labels">
+      <span>Upper class / Elite</span>
+      <span>Working class / Anti-elitist</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Ability Status</h3>
+    <div class="labels">
+      <span>Neurotypical / Able-bodied</span>
+      <span>Neurodivergent / Disabled</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Appearance Salience</h3>
+    <div class="labels">
+      <span>Appearance-focused</span>
+      <span>Appearance-indifferent</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Personal History Salience</h3>
+    <div class="labels">
+      <span>Proud of past</span>
+      <span>Detached from or ashamed of past</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Shame Orientation</h3>
+    <div class="labels">
+      <span>Internalizer</span>
+      <span>Externalizer</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Self-Esteem</h3>
+    <div class="labels">
+      <span>High, Confident</span>
+      <span>Low, Self-deprecating</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Self-Efficacy</h3>
+    <div class="labels">
+      <span>Believes they can</span>
+      <span>Believes they can't</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Boundary Management</h3>
+    <div class="labels">
+      <span>Rigid boundaries</span>
+      <span>Overly porous or none</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <div class="trait">
+    <h3>Self-Perception</h3>
+    <div class="labels">
+      <span>“I’m a leader”</span>
+      <span>“I’m a background character”</span>
+    </div>
+    <input type="range" min="0" max="100" value="50">
+  </div>
+
+  <script>
+    // Function to save all slider values to localStorage
+    function saveSliderValues() {
+      const sliders = document.querySelectorAll('input[type="range"]'); // Select all sliders
+      let currentHeader = ""; // Variable to track the current header
+
+      sliders.forEach((slider, index) => {
+        const traitElement = slider.closest('.trait'); // Get the parent trait element
+        const traitTitle = traitElement.querySelector('h3').textContent; // Get the trait title
+        const labels = traitElement.querySelectorAll('.labels span'); // Get the labels
+        const labelLeft = labels[0]?.textContent || ""; // Left label (fallback to empty string if not found)
+        const labelRight = labels[1]?.textContent || ""; // Right label (fallback to empty string if not found)
+        const value = slider.value; // Get the slider value
+        const percentageLeft = value; // Percentage for the left label
+        const percentageRight = 100 - value; // Percentage for the right label
+
+        // Check if there's a header (h1 or h2) before this slider
+        const headerElement = traitElement.previousElementSibling;
+        if (headerElement && (headerElement.tagName === "H1" || headerElement.tagName === "H2")) {
+          currentHeader = headerElement.textContent; // Update the current header
+        }
+
+        // Save the data to localStorage
+        const key = `slider${index}`; // Use a unique key for each slider
+        localStorage.setItem(
+          key,
+          JSON.stringify({
+            header: currentHeader, // Store the current header
+            title: traitTitle,
+            value: value,
+            labels: {
+              left: labelLeft,
+              right: labelRight,
+            },
+            percentages: {
+              left: percentageLeft,
+              right: percentageRight,
+            },
+          })
+        );
+      });
+
+      // Redirect to the next page
+      location.href = 'identity-matrix.html';
+    }
+  </script>
+
+  <button class="arrow-button" onclick="saveSliderValues()">→</button>
 
 </body>
 </html>
