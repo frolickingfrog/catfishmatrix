@@ -7,10 +7,12 @@
   <style>
     body {
       font-family: sans-serif;
-      background: #f9f9f9;
+      background: url('b2.png') no-repeat center center fixed;
+      background-size: cover;
       padding: 40px;
       max-width: 800px;
       margin: auto;
+      color: white; /* Set font color to white */
     }
     .back-button {
       position: absolute;
@@ -27,19 +29,23 @@
       text-decoration: underline;
     }
     .header {
-      margin-top: 10px; /* Reduced margin */
-      font-size: 1.5em; /* Larger font size */
+      margin-top: 4px; /* Reduced margin */
+      font-size: 1em; /* Larger font size */
       font-weight: bold; /* Bold font */
-      color: #333;
+      color: white; /* Set font color to white */
+      margin-bottom: 4px; /* Reduced margin */
     }
     .trait {
-      margin-bottom: 10px; /* Reduced margin */
+      
       list-style-type: disc; /* Add bullet points */
       margin-left: 20px; /* Indent bullet points */
+      color: white; /* Set font color to white */
+      /*background-color: #0000FF;  Add black background behind text */
+      /*padding: 10px; /* Add padding for better readability */
     }
     .labels {
-      font-size: 1em;
-      color: #555;
+      font-size: 0.7em;
+      color: white; /* Set font color to white */
     }
     hr {
       border: 0;
@@ -52,7 +58,21 @@
 <body>
   <a href="personality-matrix.html" class="back-button">← Back</a>
   <h1>Dashboard</h1>
-  <hr> <!-- Line added after the header -->
+  <hr>
+  <style>
+    .back-button {
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      font-size: 1.2em;
+      text-decoration: none;
+      color: white; /* Change color to white */
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
   <div id="slider-values">
     <!-- Retrieved slider values will be displayed here -->
   </div>
@@ -76,6 +96,12 @@
             const headerElement = document.createElement('div');
             headerElement.classList.add('header');
             headerElement.textContent = currentHeader;
+
+            // Add extra space for the first header
+            if (i === 0) {
+              headerElement.style.marginTop = '20px';
+            }
+
             sliderValuesContainer.appendChild(headerElement);
           }
 
