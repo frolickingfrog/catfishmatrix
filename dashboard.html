@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
   <style>
     body {
       font-family: sans-serif;
@@ -51,17 +50,17 @@
       border: 0;
       height: 1px;
       background: #ccc;
-      margin: 20px 0;
+      margin: 10px 0;
     }
   </style>
 </head>
 <body>
-  <a href="personality-matrix.html" class="back-button">← Back</a>
-  <h1>Dashboard</h1>
-  <hr>
+  <a href="personality-matrix.html" class="back-button">← back</a>
+  
   <style>
     .back-button {
       position: fixed;
+      margin-top: 0;
       top: 50%;
       left: 20px;
       transform: translateY(-50%);
@@ -71,6 +70,9 @@
       background: none;
       border: none;
       cursor: pointer;
+    }
+    body {
+      margin-bottom: 100px; /* Add more margin to the bottom of the page */
     }
   </style>
   <div id="slider-values">
@@ -83,40 +85,90 @@
       const sliderValuesContainer = document.getElementById('slider-values');
       let currentHeader = ""; // Track the current header to avoid duplicates
 
+      // Create a container for the two columns
+      const columnsContainer = document.createElement('div');
+      columnsContainer.style.display = 'flex';
+      columnsContainer.style.gap = '20px';
+
+      // Create the left and right columns
+      const leftColumn = document.createElement('div');
+      const rightColumn = document.createElement('div');
+      leftColumn.style.flex = '1';
+      rightColumn.style.flex = '1';
+
+      // Append the columns to the container
+      columnsContainer.appendChild(leftColumn);
+      columnsContainer.appendChild(rightColumn);
+
+      // Append the container to the slider values container
+      sliderValuesContainer.appendChild(columnsContainer);
+
       // Loop through all keys in localStorage
       for (let i = 0; i < localStorage.length; i++) {
-        const key = `slider${i}`;
-        const storedData = localStorage.getItem(key);
-        if (storedData) {
-          const { header, title, labels, percentages } = JSON.parse(storedData); // Parse the stored JSON object
+      const key = `slider${i}`;
+      const storedData = localStorage.getItem(key);
+      if (storedData) {
+        const { header, title, labels, percentages } = JSON.parse(storedData); // Parse the stored JSON object
 
-          // Add a new header if it changes
-          if (header !== currentHeader) {
-            currentHeader = header;
-            const headerElement = document.createElement('div');
-            headerElement.classList.add('header');
-            headerElement.textContent = currentHeader;
+        // Add a new header if it changes
+        if (header !== currentHeader) {
+        currentHeader = header;
+        const headerElement = document.createElement('div');
+        headerElement.classList.add('header');
+        headerElement.textContent = currentHeader;
 
-            // Add extra space for the first header
-            if (i === 0) {
-              headerElement.style.marginTop = '20px';
-            }
-
-            sliderValuesContainer.appendChild(headerElement);
-          }
-
-          // Create a list item to display the trait and percentages
-          const traitDiv = document.createElement('div');
-          traitDiv.classList.add('trait');
-          traitDiv.innerHTML = `
-            <div class="labels">
-              <strong>${title}:</strong> ${labels.left} (${percentages.left}%) + ${labels.right} (${percentages.right}%)
-            </div>
-          `;
-          sliderValuesContainer.appendChild(traitDiv);
+        // Add extra space for the first header
+        if (i === 0) {
+          headerElement.style.marginTop = '20px';
         }
+
+        leftColumn.appendChild(headerElement);
+        rightColumn.appendChild(headerElement.cloneNode(true)); // Clone header for the right column
+        }
+
+        // Create a list item to display the trait and percentages for the left column
+        const traitDivLeft = document.createElement('div');
+        traitDivLeft.classList.add('trait');
+        traitDivLeft.innerHTML = `
+        <div class="labels">
+        <strong>${title}:</strong> ${labels.left} (${percentages.left}%) + ${labels.right} (${percentages.right}%)
+        </div>
+        `;
+        leftColumn.appendChild(traitDivLeft);
+
+        // Create a list item to display the trait and percentages for the right column with inverse numbers
+        const traitDivRight = document.createElement('div');
+        traitDivRight.classList.add('trait');
+        traitDivRight.innerHTML = `
+        <div class="labels">
+        <strong>${title}:</strong> ${labels.right} (${percentages.right}%) + ${labels.left} (${percentages.left}%)
+        </div>
+        `;
+        rightColumn.appendChild(traitDivRight);
       }
-    };
+      }
+
+      // Add headers above each column
+      const topHeadersContainer = document.createElement('div');
+      topHeadersContainer.style.display = 'flex';
+      topHeadersContainer.style.justifyContent = 'space-between';
+      topHeadersContainer.style.marginBottom = '20px';
+
+      const youHeader = document.createElement('h2');
+      youHeader.textContent = "You";
+      youHeader.style.flex = '1';
+      youHeader.style.textAlign = 'center';
+
+      const catfishHeader = document.createElement('h2');
+      catfishHeader.textContent = "Your catfish";
+      catfishHeader.style.flex = '1';
+      catfishHeader.style.textAlign = 'center';
+
+      topHeadersContainer.appendChild(youHeader);
+      topHeadersContainer.appendChild(catfishHeader);
+
+      sliderValuesContainer.insertBefore(topHeadersContainer, columnsContainer);
+    }
   </script>
 </body>
 </html>
