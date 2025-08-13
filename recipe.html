@@ -18,14 +18,16 @@
     .back-button {
       position: fixed;
       top: 50%;
-      left: 20px;
       transform: translateY(-50%);
       font-size: 1.2em;
       text-decoration: none;
-      color: #007BFF;
+      color: #ffffff;
       background: none;
       border: none;
       cursor: pointer;
+    }
+    .back-button {
+      left: 20px;
     }
     .back-button:hover {
       text-decoration: underline;
@@ -40,9 +42,13 @@
       font-size: 1em; /* Smaller font size */
       font-weight: bold;
       margin-bottom: 10px; /* Reduced margin */
-      color: #007BFF; /* Blue color like the back button */
+      color: white; /* White font color */
       font-style: italic; /* Italicize the title */
       text-align: center; /* Center the title */
+      background: rgba(0, 123, 255, 0.2); /* Transparent blue background */
+      padding: 5px 10px; /* Add padding around the text */
+      display: inline-block; /* Shrink the background to fit the text */
+      border-radius: 5px; /* Slightly rounded corners */
     }
     .copy-button {
       font-size: 1em;
@@ -54,9 +60,11 @@
       cursor: pointer;
       margin: 0 auto; /* Center the button horizontally */
       display: block; /* Ensure the button is treated as a block element */
+      transition: background-color 0.3s ease; /* Smooth transition for hover effect */
     }
     .copy-button:hover {
-      background-color: #e0e0e0; /* Slightly darker grey on hover */
+      background-color: #007BFF; /* Same blue as the back button */
+      color: white; /* Change text color to white for better contrast */
     }
     .text-box {
       width: 100%;
@@ -73,7 +81,7 @@
   </style>
 </head>
 <body>
-  <a href="dashboard.html" class="back-button">← Back</a>
+  <a href="dashboard.html" class="back-button">← back</a>
 
   <div class="text-box-container">
     <div class="text-box-title">

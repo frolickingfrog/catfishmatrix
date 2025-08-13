@@ -25,14 +25,6 @@
     .trait {
       margin-bottom: 30px;
     }
-    body {
-        font-family: 'Inter', Arial, sans-serif; /* Use Inter font */
-      background: url('b2.png') no-repeat center center fixed;
-      background-size: cover;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
-    }
     .trait h3 {
       margin-bottom: 5px;
     }
@@ -40,35 +32,17 @@
       display: flex;
       justify-content: space-between;
       font-size: 0.9em;
-    color: #fff;
+      color: #fff;
     }
     input[type="range"] {
       width: 100%;
       margin: 10px 0;
     }
-    .arrow-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 20px;
-      font-size: 1.2em;
-      text-decoration: none;
-      color: #ffffff;
-      background: none;
-      border: none;
-      cursor: pointer;
-      position: fixed;
-    }
-
-    .arrow-button:hover {
-      text-decoration: underline;
-    }
-
+    .arrow-button,
     .left-button {
-      position: absolute;
+      position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      left: 20px;
       font-size: 1.2em;
       text-decoration: none;
       color: #ffffff;
@@ -76,15 +50,15 @@
       border: none;
       cursor: pointer;
     }
-
+    .arrow-button {
+      right: 20px;
+    }
+    .left-button {
+      left: 20px;
+    }
+    .arrow-button:hover,
     .left-button:hover {
       text-decoration: underline;
-    }
-
-    .trait:hover {
-    padding: 10px;
-    background-color: rgba(0, 0, 255, 0.1); /* Light blue background on hover */
-    border-radius: 5px;
     }
     input[type="range"] {
       -webkit-appearance: none;
@@ -95,7 +69,6 @@
       opacity: 0.7;
       transition: opacity 0.2s;
     }
-
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
@@ -106,15 +79,6 @@
       cursor: pointer;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    input[type="range"]::-webkit-slider-thumb {
-      width: 14px; /* 70% of the original 20px */
-      height: 14px; /* 70% of the original 20px */
-    }
-
-    input[type="range"]::-moz-range-thumb {
-      width: 14px; /* 70% of the original 20px */
-      height: 14px; /* 70% of the original 20px */
-    }
     input[type="range"]::-moz-range-thumb {
       width: 20px;
       height: 20px;
@@ -123,14 +87,13 @@
       cursor: pointer;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-
   </style>
 </head>
 <body>
+  <a href="index.html" class="left-button">← back</a> <!-- Back button -->
 
   <h1>Personality Trait Slider</h1>
   
-  </style>
   <div class="trait">
     <h3>Extraversion</h3>
     <div class="labels">
@@ -1476,7 +1439,7 @@
     }
   </script>
 
-  <button class="arrow-button" onclick="saveSliderValues()">next →</button>
+  <button class="arrow-button" onclick="saveSliderValues()">next →</button> <!-- Next button -->
 
 </body>
 </html>
