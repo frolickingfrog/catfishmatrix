@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: url('b2.png') no-repeat center center fixed; /* Same background as dashboard.html */
+      background-size: cover;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+      color: white; /* Set font color to white */
+      text-align: center;
+    }
+    .back-button {
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      font-size: 1.2em;
+      text-decoration: none;
+      color: #007BFF;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .back-button:hover {
+      text-decoration: underline;
+    }
+    .text-box-container {
+      margin: auto;
+      margin-top: 20%;
+      width: 80%;
+      padding: 20px;
+    }
+    .text-box-title {
+      font-size: 1em; /* Smaller font size */
+      font-weight: bold;
+      margin-bottom: 10px; /* Reduced margin */
+      color: #007BFF; /* Blue color like the back button */
+      font-style: italic; /* Italicize the title */
+      text-align: center; /* Center the title */
+    }
+    .copy-button {
+      font-size: 1em;
+      padding: 10px;
+      background-color: #f0f0f0; /* Slightly grey background */
+      color: black; /* Black font */
+      border: none; /* No outline */
+      width: 50%; /* Half the width of the text box */
+      cursor: pointer;
+      margin: 0 auto; /* Center the button horizontally */
+      display: block; /* Ensure the button is treated as a block element */
+    }
+    .copy-button:hover {
+      background-color: #e0e0e0; /* Slightly darker grey on hover */
+    }
+    .text-box {
+      width: 100%;
+      height: 250px; /* Increased height */
+      padding: 10px;
+      font-family: monospace; /* Monospace font for better readability */
+      background: #001a33; /* Even darker blue background */
+      border: 2px solid #555; /* Thicker dark grey border */
+      border-radius: 0; /* No rounded corners */
+      overflow-y: auto;
+      color: white; /* White text color */
+      margin-bottom: 10px; /* Reduced margin to match the title and button */
+    }
+  </style>
+</head>
+<body>
+  <a href="dashboard.html" class="back-button">← Back</a>
+
+  <div class="text-box-container">
+    <div class="text-box-title">
+      Copy and paste your catfish recipe to your favorite LLM
+    </div>
+    <textarea id="catfish-text-box" class="text-box" readonly></textarea> <!-- Text box for copy-pasteable content -->
+    <button class="copy-button" onclick="copyToClipboard()">Copy</button>
+  </div>
+
+  <script>
+    // Function to populate the text box with catfish traits
+    window.onload = function() {
+      const catfishTextBox = document.getElementById('catfish-text-box');
+      let catfishTraits = "Describe a person who is:\n"; // Initialize the text box content
+
+      // Loop through all keys in localStorage
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = `slider${i}`;
+        const storedData = localStorage.getItem(key);
+        if (storedData) {
+          const { title, labels, percentages } = JSON.parse(storedData); // Parse the stored JSON object
+
+          // Add the trait to the catfish text box content
+          catfishTraits += `${title}: ${labels.left} (${percentages.left}%), ${labels.right} (${percentages.right}%)\n`;
+        }
+      }
+
+      // Set the content of the text box
+      catfishTextBox.value = catfishTraits;
+    };
+
+    // Function to copy the content of the text box to the clipboard
+    function copyToClipboard() {
+      const catfishTextBox = document.getElementById('catfish-text-box');
+      catfishTextBox.select();
+      catfishTextBox.setSelectionRange(0, 99999); // For mobile devices
+      document.execCommand("copy");
+      alert("Copied to clipboard!");
+    }
+  </script>
+</body>
+</html>

@@ -13,10 +13,10 @@
       margin: auto;
       color: white; /* Set font color to white */
     }
-    .back-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
+    .back-button, .next-button {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
       font-size: 1.2em;
       text-decoration: none;
       color: #007BFF;
@@ -24,7 +24,13 @@
       border: none;
       cursor: pointer;
     }
-    .back-button:hover {
+    .back-button {
+      left: 20px;
+    }
+    .next-button {
+      right: 20px;
+    }
+    .back-button:hover, .next-button:hover {
       text-decoration: underline;
     }
     .header {
@@ -35,12 +41,9 @@
       margin-bottom: 4px; /* Reduced margin */
     }
     .trait {
-      
       list-style-type: disc; /* Add bullet points */
       margin-left: 20px; /* Indent bullet points */
       color: white; /* Set font color to white */
-      /*background-color: #0000FF;  Add black background behind text */
-      /*padding: 10px; /* Add padding for better readability */
     }
     .labels {
       font-size: 0.7em;
@@ -55,26 +58,9 @@
   </style>
 </head>
 <body>
-  <a href="personality-matrix.html" class="back-button">← back</a>
-  
-  <style>
-    .back-button {
-      position: fixed;
-      margin-top: 0;
-      top: 50%;
-      left: 20px;
-      transform: translateY(-50%);
-      font-size: 1.2em;
-      text-decoration: none;
-      color: white; /* Change color to white */
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-    body {
-      margin-bottom: 100px; /* Add more margin to the bottom of the page */
-    }
-  </style>
+  <a href="personality-matrix.html" class="back-button">← Back</a>
+  <a href="recipe.html" class="next-button">Next →</a>
+
   <div id="slider-values">
     <!-- Retrieved slider values will be displayed here -->
   </div>
